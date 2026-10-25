@@ -39,10 +39,14 @@ Verify connection:
 --> docker ps
 Build your first container image:
 --> docker build -t your-dockerhub-username/product-catalog:v1 -f src/product-catalog/Dockerfile src/product-catalog/
+--> PS D:\SQL\Kubernetes\Ultimate_DevOps_project_AV\ultimate-devops-project-demo> docker build -t your-dockerhub-username/product-catalog:v1 -f src/product-catalog/Dockerfile src/product-catalog/
 Run your container:
 --> docker run -d -p 8088:8088 --name my-product-catalog your-dockerhub-username/product-catalog:v1
 Push it to Docker Hub:
 --> docker push your-dockerhub-username/product-catalog:v1
+
+
+
 
 
 
