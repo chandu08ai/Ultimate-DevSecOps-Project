@@ -1,0 +1,48 @@
+# Dockerizing the Go app
+
+# ---------------- Stage 1: Build the code ----------------
+FROM golang:1.22-alpine AS builder
+
+WORKDIR /usr/src/app/
+
+# Cache dependencies
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
+    mkdir -p /root/.cache/go-build
+
+# Copy dependency lists first
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy the rest of the source code and compile
+COPY . .
+RUN go build -o product-catalog .
+
+# ---------------- Stage 2: Minimal Production Image ----------------
+FROM alpine AS release
+
+WORKDIR /usr/src/app/
+
+COPY ./products/ ./products/
+COPY --from=builder /usr/src/app/product-catalog/ ./
+
+ENV PRODUCT_CATALOG_PORT=8088
+ENTRYPOINT [ "./product-catalog" ]
+
+
+....................................................................................................
+
+
+Once you have Docker Desktop opened, we will run our first real DevOps commands from PowerShell:
+
+Verify connection:
+--> docker ps
+Build your first container image:
+--> docker build -t your-dockerhub-username/product-catalog:v1 -f src/product-catalog/Dockerfile src/product-catalog/
+Run your container:
+--> docker run -d -p 8088:8088 --name my-product-catalog your-dockerhub-username/product-catalog:v1
+Push it to Docker Hub:
+--> docker push your-dockerhub-username/product-catalog:v1
+
+
+
