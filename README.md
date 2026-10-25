@@ -17,3 +17,11 @@ We will tackle this together in 5 phases:
 
 
 
+The Polyglot Microservices Stack
+
+The microservices are located in the src/ directory:
+<img width="939" height="721" alt="image" src="https://github.com/user-attachments/assets/229b35ea-bb86-4146-9e90-abcbf77defcb" />
+<img width="945" height="339" alt="image" src="https://github.com/user-attachments/assets/4dffdea2-93f2-49c2-8878-af80b7321c05" />
+
+
+
